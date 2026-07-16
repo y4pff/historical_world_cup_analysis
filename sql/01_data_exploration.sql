@@ -1,111 +1,37 @@
-/* 
-Historical FIFA World Cup Performance Analysis
+USE WorldCupAnalysis;
+GO
 
-File: 01_data_exploration.sql
-Purpose: Explore the WorldCupMatches table before performing deeper analysis.
-*/
-
-/*
-Question 1
-How many historical World Cup matches are contained in the dataset?
-
-SQL
-
-*/
-SELECT COUNT(*) AS total_matches
-FROM dbo.WorldCupMatches;
-/*
-
-Result
-4592
-
-Question 2
-How many different World Cup tournaments are represented in the dataset?
-
-SQL
-
-*/
-SELECT COUNT(DISTINCT Year) AS total_tournaments
-FROM dbo.WorldCupMatches;
-/*
-
-Result
-20
-
-Question 3
-What is the earliest and lastest tournament in the data?
-
-SQL
-
-*/
+/* Raw, populated and cleaned row counts. */
 SELECT
-    MIN(Year) AS first_tournament,
-    MAX(Year) AS latest_tournament
+    COUNT(*) AS raw_rows,
+    COUNT([Year]) AS populated_match_rows,
+    COUNT(DISTINCT MatchID) AS unique_match_ids
 FROM dbo.WorldCupMatches;
-/*
 
-Result
-1930 & 2014
+SELECT COUNT(*) AS cleaned_matches
+FROM dbo.vw_CleanWorldCupMatches;
 
+/* Tournament coverage. */
+SELECT
+    COUNT(DISTINCT [Year]) AS total_tournaments,
+    MIN([Year]) AS first_tournament,
+    MAX([Year]) AS latest_tournament
+FROM dbo.vw_CleanWorldCupMatches;
 
-Question 4 
-How many unique countries have participated in the World Cup?
+/* Distinct raw team labels. */
+WITH Teams AS (
+    SELECT Home_Team_Name AS team
+    FROM dbo.vw_CleanWorldCupMatches
+    UNION
+    SELECT Away_Team_Name
+    FROM dbo.vw_CleanWorldCupMatches
+)
+SELECT COUNT(*) AS unique_team_labels
+FROM Teams
+WHERE team IS NOT NULL;
 
-SQL 
-
-*/
-SELECT COUNT(*) AS total_countries
-FROM (
-SELECT Home_Team_Name
-FROM dbo.WorldCupMatches
-UNION
-SELECT Away_Team_Name
-FROM dbo.WorldCupMatches
-) AS CountryList
-/*
-
-Result
-84
-
-Question 5
-Which tournament featured the highest number of matches?
-
-SQL 
-
-*/
-SELECT TOP 1 year, COUNT(year) AS highest_num_of_matches
-FROM dbo.WorldCupMatches
-GROUP BY year
-ORDER BY COUNT(year) DESC
-/*
-
-Result
-2014
-
-Question 6
-Which countries have played the most World Cup matches?
-
-SQL
-
-*/
-SELECT TOP 1 country, count(*) AS games_played FROM (
-	SELECT home_team_name AS country
-	FROM dbo.WorldCupMatches
-
-	UNION ALL
-
-	SELECT away_team_name
-	FROM dbo.WorldCupMatches
-
-	) AS teams
-
-WHERE country IS NOT NULL
-
-GROUP BY country
-ORDER BY games_played DESC
-/*
-
-Result
-108
-
-(Included 'WHERE' statement to remove null values.)
+/* Match count for every tournament; the maximum is 64. */
+SELECT [Year], COUNT(*) AS matches_played
+FROM dbo.vw_CleanWorldCupMatches
+GROUP BY [Year]
+ORDER BY [Year];
