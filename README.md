@@ -117,29 +117,29 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 - Build a Power BI dashboard from the cleaned data.
 - Add 2018 and 2022 only as a separately sourced extension.
 
-## Author
-
-**Yahye** · [GitHub](https://github.com/y4pff)
-
 ## Insights
 
-- Question 1:
-The dataset contains 4,572 historical World Cup match records, providing a substantial dataset for analysing tournament history, team performance, and scoring trends.
+- **Question 1: How many World Cup matches are contained in the dataset?**  
+  The original CSV contains 4,572 rows, but only 852 contain match data. After removing 16 duplicated records, the cleaned dataset contains 836 unique World Cup matches. This demonstrates the importance of validating and cleaning data before analysis.
 
-- Question 2:
-It contains 20 tournaments, from 1930 to 2014. World Cup has taken place every four years since 1930 with the exception of the 40s due to WW2.
+- **Question 2: How many tournaments are represented?**  
+  The dataset contains 20 tournaments covering 1930 to 2014. The World Cup has generally taken place every four years, except in 1942 and 1946 because of the Second World War.
 
-- Question 3:
-1930 was the first world cup and 2014 is the latest inlcuded in this dataset.
+- **Question 3: What are the earliest and latest tournaments?**  
+  The first World Cup included in the dataset is 1930, and the latest is 2014.
 
-- Question 4:
-83 unique teams have ever played in the world cup.
+- **Question 4: How many teams are represented?**  
+  The cleaned dataset contains 83 distinct raw team labels. Historical labels such as `Germany FR` and `Germany` are currently treated separately.
 
-- Question 5: 
-2014 had the most games played in a world cup, up until then, with 80 games played.
+- **Question 5: Which tournaments contained the most matches?**  
+  The maximum number of matches is 64. This format first appeared in 1998 and was repeated in 2002, 2006, 2010 and 2014.
 
-- Question 6:
-Brazil has played the most world cup games until 2014, playing 108. 
+- **Question 6: Which team played the most matches?**  
+  Brazil played the most World Cup matches under a single team label, recording 104 appearances through 2014. This reflects Brazil's consistent qualification and long-term tournament participation.
 
-- Question 7:
-Brazil also has the most wins in the World Cup with 70, with Italy in second place with 45.
+- **Question 7: Which team recorded the most wins?**  
+  Brazil recorded the most scoreline wins with 70, followed by Italy with 45. Penalty-shootout outcomes are stored separately and require additional analysis.
+
+  ## Author
+
+**Yahye** · [GitHub](https://github.com/y4pff)
