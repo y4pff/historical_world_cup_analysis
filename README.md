@@ -120,3 +120,26 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 ## Author
 
 **Yahye** · [GitHub](https://github.com/y4pff)
+
+## Insights
+
+- Question 1:
+The dataset contains 4,572 historical World Cup match records, providing a substantial dataset for analysing tournament history, team performance, and scoring trends.
+
+- Question 2:
+It contains 20 tournaments, from 1930 to 2014. World Cup has taken place every four years since 1930 with the exception of the 40s due to WW2.
+
+- Question 3:
+1930 was the first world cup and 2014 is the latest inlcuded in this dataset.
+
+- Question 4:
+83 unique teams have ever played in the world cup.
+
+- Question 5: 
+2014 had the most games played in a world cup, up until then, with 80 games played.
+
+- Question 6:
+Brazil has played the most world cup games until 2014, playing 108. 
+
+- Question 7:
+Brazil also has the most wins in the World Cup with 70, with Italy in second place with 45.
