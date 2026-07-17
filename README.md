@@ -140,6 +140,6 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 - **Question 7: Which team recorded the most wins?**  
   Brazil recorded the most scoreline wins with 70, followed by Italy with 45. Penalty-shootout outcomes are stored separately and require additional analysis.
 
-  ## Author
+## Author
 
 **Yahye** · [GitHub](https://github.com/y4pff)
