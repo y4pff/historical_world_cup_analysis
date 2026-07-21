@@ -149,7 +149,7 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 - Historical labels affect the rankings: `Germany FR` and `Germany` are treated separately, so these figures should not be interpreted as Germany’s combined World Cup history.
 - Italy ranked second for matches and scoreline wins, reflecting sustained participation and success across the period.
 
-: **Tournament insights**
+: **Tournament Insights**
 
 - The World Cup expanded a lot over time, growing from 18 matches in 1930 to 64 matches from 1998 onwards.
 - The 1998 and 2014 tournaments produced the most total goals, with 171 each. Their larger 64-match formats contributed to these totals.
@@ -157,6 +157,16 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 - The 1990 World Cup recorded the lowest scoring rate, averaging 2.21 goals per match.
 - The 1994 World Cup recorded the highest total attendance at 3,587,538 and the highest average attendance at 68,991 per match.
 - Attendance data for 2014 is incomplete because only 63 of its 64 matches contain an attendance value.
+
+: **England Insight**
+England's strongest tournament by scoreline wins was 1966,
+when the team won five of six matches and finished undefeated.
+
+England also recorded no scoreline losses in 1982 and 2006,
+although its 2006 elimination came through a penalty shootout.
+
+The 2014 tournament was England's weakest in the dataset,
+with no wins from three matches.
 
 ## Author
 
