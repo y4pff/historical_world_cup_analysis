@@ -119,6 +119,8 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 
 ## Insights
 
+: **Data exploration insights**
+
 - **Question 1: How many World Cup matches are contained in the dataset?**  
   The original CSV contains 4,572 rows, but only 852 contain match data. After removing 16 duplicated records, the cleaned dataset contains 836 unique World Cup matches. This demonstrates the importance of validating and cleaning data before analysis.
 
@@ -139,6 +141,13 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 
 - **Question 7: Which team recorded the most wins?**  
   Brazil recorded the most scoreline wins with 70, followed by Italy with 45. Penalty-shootout outcomes are stored separately and require additional analysis.
+
+: **Team performance insights**
+
+- Brazil demonstrated the greatest long-term World Cup presence, leading the dataset in matches played (104), scoreline wins (70), goals scored (221) and goal difference (+119).
+- Germany recorded the highest scoreline win percentage among teams with at least 10 appearances, at 68.18%, slightly above Brazil’s 67.31%.
+- Historical labels affect the rankings: `Germany FR` and `Germany` are treated separately, so these figures should not be interpreted as Germany’s combined World Cup history.
+- Italy ranked second for matches and scoreline wins, reflecting sustained participation and success across the period.
 
 ## Author
 
