@@ -158,15 +158,15 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 - The 1994 World Cup recorded the highest total attendance at 3,587,538 and the highest average attendance at 68,991 per match.
 - Attendance data for 2014 is incomplete because only 63 of its 64 matches contain an attendance value.
 
-: **England Insight**
-England's strongest tournament by scoreline wins was 1966,
-when the team won five of six matches and finished undefeated.
+: **England World Cup Insight**
 
-England also recorded no scoreline losses in 1982 and 2006,
-although its 2006 elimination came through a penalty shootout.
-
-The 2014 tournament was England's weakest in the dataset,
-with no wins from three matches.
+- England played 62 World Cup matches between its first appearance in 1950 and the latest tournament in the dataset in 2014.
+- Across those matches, England recorded 26 scoreline wins, 20 draws and 16 losses, scoring 79 goals and conceding 56.
+- England's strongest tournament was 1966, when the team won five of six matches, remained undefeated and won the World Cup.
+- England also remained unbeaten by scoreline in 1982 and 2006. However, the team was eliminated on penalties by Portugal in the 2006 quarter-final.
+- England played 18 knockout matches, recording eight scoreline wins, three draws and seven losses while scoring 30 goals and conceding 28.
+- The three level knockout scorelines include matches decided by penalty shootouts, showing why shootout outcomes must be considered separately from the recorded scoreline.
+- England's weakest tournament in the dataset was 2014, when the team recorded no wins, one draw and two losses.
 
 ## Author
 
