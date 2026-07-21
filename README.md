@@ -11,7 +11,7 @@ A SQL Server project exploring historical FIFA World Cup data, with a focus on d
 - ✅ Data-quality issues identified
 - ✅ Core exploration queries corrected
 - ✅ Matches played and scoreline wins analysed
-- ⏳ Further team analysis
+- ✅ Further team analysis + England analysis
 - ⏳ Power BI dashboard
 
 ## Overview
