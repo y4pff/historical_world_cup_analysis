@@ -71,9 +71,12 @@ Historical labels such as `Germany FR` and `Germany` remain separate for now. Th
 
 Run the scripts in this order:
 
-1. `sql/00_create_clean_view.sql` filters blank rows and deduplicates `MatchID`.
-2. `sql/01_data_exploration.sql` validates row counts, tournament coverage and team labels.
-3. `sql/02_team_performance.sql` calculates matches, wins, draws, losses, goals and win percentage.
+1. `sql/00_create_clean_view.sql` — removes blank and duplicated match records.
+2. `sql/01_data_exploration.sql` — explores matches, tournaments and team labels.
+3. `sql/02_team_performance.sql` — creates the reusable team-performance view.
+4. `sql/03_team_rankings.sql` — ranks teams by matches, wins, goals, goal difference and win percentage.
+5. `sql/04_tournament_analysis.sql` — analyses tournament size, scoring and attendance.
+6. `sql/05_england_analysis.sql` — analyses England’s overall, tournament and knockout performance.
 
 All analysis queries use `dbo.vw_CleanWorldCupMatches`, ensuring they are calculated from the same cleaned set of 836 matches.
 
