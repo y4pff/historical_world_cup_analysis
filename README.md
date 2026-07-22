@@ -1,207 +1,176 @@
 # ⚽ Historical FIFA World Cup Performance Analysis (1930–2014)
 
-## **Status:** 🚧 In Progress
+A SQL Server project exploring historical FIFA World Cup data, with a focus on data quality and national-team performance.
 
-Current Progress:
-- ✅ Database created
-- ✅ Data imported
-- ✅ Data exploration completed
-- 🚧 Team performance analysis in progress
-- ⏳ Python visualisations
-- ⏳ Dashboard
+## Project status
+
+**Current phase: SQL data exploration and team-performance analysis**
+
+- ✅ SQL Server database created
+- ✅ CSV files imported
+- ✅ Data-quality issues identified
+- ✅ Core exploration queries corrected
+- ✅ Matches played and scoreline wins analysed
+- ✅ Further team analysis + England analysis
+- ⏳ Power BI dashboard
 
 ## Overview
 
-This project analyses historical FIFA World Cup data using SQL Server and Python to identify long-term performance trends, compare national teams, and explore England's World Cup history.
+This project analyses FIFA World Cup tournaments from 1930 to 2014. It currently demonstrates database setup, CSV import, data profiling, cleaning and SQL aggregation.
 
-The project demonstrates end-to-end data analysis, including database creation, data import, SQL querying, data exploration, and visualisation.
+The analysis completed so far answers:
 
----
-
-## Objectives
-
-This project aims to answer questions such as:
-
-- Which countries have played the most World Cup matches?
-- Which teams have the highest win percentage?
-- Which countries have scored the most goals?
-- Which tournaments produced the most goals?
-- How has England performed throughout World Cup history?
-
----
-
-## Technologies Used
-
-- SQL Server
-- SQL Server Management Studio (SSMS)
-- Python
-- Pandas
-- Matplotlib
-- Excel
-- Git
-- GitHub
-
----
+- How many valid World Cup matches are in the dataset?
+- How many tournaments and team labels are represented?
+- Which tournaments contained the most matches?
+- Which teams played the most matches?
+- Which teams recorded the most scoreline wins?
 
 ## Dataset
 
-**Source:** FIFA World Cup Historical Dataset
+Source: [FIFA World Cup dataset on Kaggle](https://www.kaggle.com/datasets/abecklas/fifa-world-cup)
 
-Files used:
+| File | Description |
+| --- | --- |
+| `WorldCupMatches.csv` | Match results, teams, stages, venues and attendance |
+| `WorldCupPlayers.csv` | Player appearances, positions and events |
+| `WorldCups.csv` | Tournament hosts, winners, goals and attendance |
 
-- WorldCupMatches.csv
-- WorldCupPlayers.csv
-- WorldCups.csv
+The current SQL analysis uses `WorldCupMatches.csv`.
 
-Coverage:
+## Important data-quality finding
 
-- 1930–2014
-- 4,572 historical World Cup match records
+The match CSV contains **4,572 data rows**, but it does not contain 4,572 real matches:
 
----
+- **3,720 rows are blank**;
+- **852 rows contain match data**; and
+- **16 populated 2014 rows duplicate existing `MatchID` values**.
 
-## Project Structure
+After filtering blank rows and keeping one row per `MatchID`, the analysis contains **836 unique matches**.
+
+This cleaning step corrects the original results that showed 80 matches in 2014, 108 Brazil appearances and 71 Brazil wins.
+
+## Corrected findings so far
+
+| Question | Correct result |
+| --- | --- |
+| Unique World Cup matches | **836** |
+| Tournaments covered | **20** |
+| First and latest tournaments | **1930 and 2014** |
+| Distinct raw team labels | **83** |
+| Maximum matches in one tournament | **64** |
+| Team with most matches | **Brazil — 104** |
+| Team with most scoreline wins | **Brazil — 70** |
+| Second-most scoreline wins | **Italy — 45** |
+
+A scoreline win means that a team scored more goals than its opponent in the match score columns. Penalty-shootout outcomes are stored separately in `Win_conditions` and will be treated explicitly in later analysis.
+
+Historical labels such as `Germany FR` and `Germany` remain separate for now. They should only be combined after adding a documented team-name mapping.
+
+## SQL workflow
+
+Run the scripts in this order:
+
+1. `sql/00_create_clean_view.sql` — removes blank and duplicated match records.
+2. `sql/01_data_exploration.sql` — explores matches, tournaments and team labels.
+3. `sql/02_team_performance.sql` — creates the reusable team-performance view.
+4. `sql/03_team_rankings.sql` — ranks teams by matches, wins, goals, goal difference and win percentage.
+5. `sql/04_tournament_analysis.sql` — analyses tournament size, scoring and attendance.
+6. `sql/05_england_analysis.sql` — analyses England’s overall, tournament and knockout performance.
+
+All analysis queries use `dbo.vw_CleanWorldCupMatches`, ensuring they are calculated from the same cleaned set of 836 matches.
+
+## Repository structure
 
 ```text
-world-cup-performance-analysis
-│
+historical_world_cup_analysis/
 ├── data/
+│   ├── README.md
+│   ├── WorldCupMatches.csv
+│   ├── WorldCupPlayers.csv
+│   └── WorldCups.csv
 ├── sql/
-├── notebooks/
+│   ├── 00_create_clean_view.sql
+│   ├── 01_data_exploration.sql
+│   └── 02_team_performance.sql
 ├── visuals/
-├── README.md
-└── project-notes.md
+│   └── legacy_ssms_results/
+├── .gitignore
+├── project_notes.md
+└── README.md
 ```
 
----
+The screenshots in `visuals/legacy_ssms_results/` show results from before the duplicate and blank-row corrections. They are retained as working history and should not be used as final evidence.
 
-# Project Workflow
+## Tools and SQL skills demonstrated
 
-## 1. Data Collection
+- SQL Server and SQL Server Management Studio
+- CSV import and data-type correction
+- Null and duplicate detection
+- CTEs and `ROW_NUMBER()`
+- Aggregation, `CASE`, `UNION` and `UNION ALL`
+- Reproducible metric definitions
+- Git and GitHub
 
-- Downloaded historical FIFA World Cup datasets
-- Organised project files
+## Planned next steps
 
----
-
-## 2. Database Creation
-
-Created a SQL Server database called:
-
-```sql
-CREATE DATABASE WorldCupAnalysis;
-```
-
----
-
-## 3. Data Import
-
-Imported the CSV files into SQL Server.
-
-Challenges encountered:
-
-- RoundID exceeded SMALLINT range
-- Missing values prevented import
-- Updated data types
-- Allowed NULL values where appropriate
-
----
-
-## 4. Data Exploration
-
-Performed initial exploration to understand:
-
-- Table structure
-- Data types
-- Number of records
-- Missing values
-- Match-level granularity
-
----
-
-## 5. SQL Analysis
-
-The analysis is divided into multiple sections.
-
-### Data Exploration
-
-- Total matches
-- Tournament coverage
-- Missing values
-
-### Team Performance
-
-- Matches played
-- Wins
-- Goals scored
-- Goal difference
-
-### England Analysis
-
-- Overall record
-- Tournament history
-- Goals scored
-- Knockout performance
-
-### Tournament Analysis
-
-- Highest scoring World Cups
-- Average goals per game
-- Attendance trends
-
----
-
-## Visualisations
-
-To be completed.
-
----
-
-## Skills Demonstrated
-
-- SQL querying
-- Data cleaning
-- Data exploration
-- Aggregation
-- Subqueries
-- UNION and UNION ALL
-- Business problem solving
-- Data storytelling
-
----
-
-## Future Improvements
-
-- Add Power BI dashboard
-- Build interactive Python visualisations
-- Extend the analysis using newer World Cup datasets
-- Compare historical trends with the 2026 World Cup
-
----
-
-## Author
-
-Yahye
+- Complete goals, goal difference and win-percentage analysis.
+- Analyse England's performance by tournament and stage.
+- Analyse scoring and attendance trends by tournament.
+- Build a Power BI dashboard from the cleaned data.
+- Add 2018 and 2022 only as a separately sourced extension.
 
 ## Insights
 
-- Question 1:
-The dataset contains 4,572 historical World Cup match records, providing a substantial dataset for analysing tournament history, team performance, and scoring trends.
+: **Data exploration insights**
 
-- Question 2:
-It contains 20 tournaments, from 1930 to 2014. World Cup has taken place every four years since 1930 with the exception of the 40s due to WW2.
+- **Question 1: How many World Cup matches are contained in the dataset?**  
+  The original CSV contains 4,572 rows, but only 852 contain match data. After removing 16 duplicated records, the cleaned dataset contains 836 unique World Cup matches. This demonstrates the importance of validating and cleaning data before analysis.
 
-- Question 3:
-1930 was the first world cup and 2014 is the latest inlcuded in this dataset.
+- **Question 2: How many tournaments are represented?**  
+  The dataset contains 20 tournaments covering 1930 to 2014. The World Cup has generally taken place every four years, except in 1942 and 1946 because of the Second World War.
 
-- Question 4:
-83 unique teams have ever played in the world cup.
+- **Question 3: What are the earliest and latest tournaments?**  
+  The first World Cup included in the dataset is 1930, and the latest is 2014.
 
-- Question 5: 
-2014 had the most games played in a world cup, up until then, with 80 games played.
+- **Question 4: How many teams are represented?**  
+  The cleaned dataset contains 83 distinct raw team labels. Historical labels such as `Germany FR` and `Germany` are currently treated separately.
 
-- Question 6:
-Brazil has played the most world cup games until 2014, playing 108. 
+- **Question 5: Which tournaments contained the most matches?**  
+  The maximum number of matches is 64. This format first appeared in 1998 and was repeated in 2002, 2006, 2010 and 2014.
 
-- Question 7:
-Brazil also has the most wins in the World Cup with 70, with Italy in second place with 45.
+- **Question 6: Which team played the most matches?**  
+  Brazil played the most World Cup matches under a single team label, recording 104 appearances through 2014. This reflects Brazil's consistent qualification and long-term tournament participation.
+
+- **Question 7: Which team recorded the most wins?**  
+  Brazil recorded the most scoreline wins with 70, followed by Italy with 45. Penalty-shootout outcomes are stored separately and require additional analysis.
+
+: **Team performance insights**
+
+- Brazil demonstrated the greatest long-term World Cup presence, leading the dataset in matches played (104), scoreline wins (70), goals scored (221) and goal difference (+119).
+- Germany recorded the highest scoreline win percentage among teams with at least 10 appearances, at 68.18%, slightly above Brazil’s 67.31%.
+- Historical labels affect the rankings: `Germany FR` and `Germany` are treated separately, so these figures should not be interpreted as Germany’s combined World Cup history.
+- Italy ranked second for matches and scoreline wins, reflecting sustained participation and success across the period.
+
+: **Tournament Insights**
+
+- The World Cup expanded a lot over time, growing from 18 matches in 1930 to 64 matches from 1998 onwards.
+- The 1998 and 2014 tournaments produced the most total goals, with 171 each. Their larger 64-match formats contributed to these totals.
+- The 1954 World Cup was the highest-scoring tournament relative to its size, averaging 5.38 goals per match.
+- The 1990 World Cup recorded the lowest scoring rate, averaging 2.21 goals per match.
+- The 1994 World Cup recorded the highest total attendance at 3,587,538 and the highest average attendance at 68,991 per match.
+- Attendance data for 2014 is incomplete because only 63 of its 64 matches contain an attendance value.
+
+: **England World Cup Insight**
+
+- England played 62 World Cup matches between its first appearance in 1950 and the latest tournament in the dataset in 2014.
+- Across those matches, England recorded 26 scoreline wins, 20 draws and 16 losses, scoring 79 goals and conceding 56.
+- England's strongest tournament was 1966, when the team won five of six matches, remained undefeated and won the World Cup.
+- England also remained unbeaten by scoreline in 1982 and 2006. However, the team was eliminated on penalties by Portugal in the 2006 quarter-final.
+- England played 18 knockout matches, recording eight scoreline wins, three draws and seven losses while scoring 30 goals and conceding 28.
+- The three level knockout scorelines include matches decided by penalty shootouts, showing why shootout outcomes must be considered separately from the recorded scoreline.
+- England's weakest tournament in the dataset was 2014, when the team recorded no wins, one draw and two losses.
+
+## Author
+
+**Yahye** · [GitHub](https://github.com/y4pff)
