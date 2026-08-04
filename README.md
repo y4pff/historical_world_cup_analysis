@@ -59,9 +59,9 @@ This cleaning step corrects the original results that showed 80 matches in 2014,
 | First and latest tournaments | **1930 and 2014** |
 | Distinct raw team labels | **83** |
 | Maximum matches in one tournament | **64** |
-| Team with most matches | **Brazil — 104** |
-| Team with most scoreline wins | **Brazil — 70** |
-| Second-most scoreline wins | **Italy — 45** |
+| Team with most matches | **Brazil - 104** |
+| Team with most scoreline wins | **Brazil - 70** |
+| Second-most scoreline wins | **Italy - 45** |
 
 A scoreline win means that a team scored more goals than its opponent in the match score columns. Penalty-shootout outcomes are stored separately in `Win_conditions` and will be treated explicitly in later analysis.
 
