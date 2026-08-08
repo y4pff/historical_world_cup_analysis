@@ -4,7 +4,7 @@ A SQL Server project exploring historical FIFA World Cup data, with a focus on d
 
 ## Project status
 
-**Current phase: SQL data exploration and team-performance analysis**
+**Current phase: Analysis complete — SQL analysis and Power BI dashboard**
 
 - ✅ SQL Server database created
 - ✅ CSV files imported
@@ -12,19 +12,21 @@ A SQL Server project exploring historical FIFA World Cup data, with a focus on d
 - ✅ Core exploration queries corrected
 - ✅ Matches played and scoreline wins analysed
 - ✅ Further team analysis + England analysis
-- ⏳ Power BI dashboard
+- ✅ Power BI dashboard completed
 
 ## Overview
 
 This project analyses FIFA World Cup tournaments from 1930 to 2014. It currently demonstrates database setup, CSV import, data profiling, cleaning and SQL aggregation.
 
-The analysis completed so far answers:
+The project demonstrates an end-to-end data analysis workflow, including database setup, CSV import, data profiling, data cleaning, SQL analysis and Power BI visualisation.
 
-- How many valid World Cup matches are in the dataset?
-- How many tournaments and team labels are represented?
-- Which tournaments contained the most matches?
-- Which teams played the most matches?
-- Which teams recorded the most scoreline wins?
+The completed analysis explores:
+
+- Data quality and tournament coverage
+- Historical team performance and rankings
+- Goals and attendance trends across tournaments
+- England's World Cup performance
+- Interactive visualisation of the findings in Power BI
 
 ## Dataset
 
@@ -80,6 +82,22 @@ Run the scripts in this order:
 
 All analysis queries use `dbo.vw_CleanWorldCupMatches`, ensuring they are calculated from the same cleaned set of 836 matches.
 
+## Power BI Dashboard
+
+The cleaned SQL views were imported into Power BI to create a three-page dashboard covering tournament trends, team performance and England's World Cup history.
+
+### World Cup Overview
+
+![World Cup Overview](visuals/powerbi/world_cup_overview.png)
+
+### Team Performance
+
+![Team Performance](visuals/powerbi/team_performance.png)
+
+### England Analysis
+
+![England Analysis](visuals/powerbi/england_analysis.png)
+
 ## Repository structure
 
 ```text
@@ -110,15 +128,11 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 - CTEs and `ROW_NUMBER()`
 - Aggregation, `CASE`, `UNION` and `UNION ALL`
 - Reproducible metric definitions
+- Power BI dashboard development
+- DAX measures
+- Data visualisation
+- SQL-to-Power BI data modelling
 - Git and GitHub
-
-## Planned next steps
-
-- Complete goals, goal difference and win-percentage analysis.
-- Analyse England's performance by tournament and stage.
-- Analyse scoring and attendance trends by tournament.
-- Build a Power BI dashboard from the cleaned data.
-- Add 2018 and 2022 only as a separately sourced extension.
 
 ## Insights
 
@@ -148,7 +162,7 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 : **Team performance insights**
 
 - Brazil demonstrated the greatest long-term World Cup presence, leading the dataset in matches played (104), scoreline wins (70), goals scored (221) and goal difference (+119).
-- Germany recorded the highest scoreline win percentage among teams with at least 10 appearances, at 68.18%, slightly above Brazil’s 67.31%.
+- Germany recorded the highest scoreline win percentage among teams with at least 10 matches played, at 68.18%, slightly above Brazil’s 67.31%.
 - Historical labels affect the rankings: `Germany FR` and `Germany` are treated separately, so these figures should not be interpreted as Germany’s combined World Cup history.
 - Italy ranked second for matches and scoreline wins, reflecting sustained participation and success across the period.
 
@@ -170,6 +184,13 @@ The screenshots in `visuals/legacy_ssms_results/` show results from before the d
 - England played 18 knockout matches, recording eight scoreline wins, three draws and seven losses while scoring 30 goals and conceding 28.
 - The three level knockout scorelines include matches decided by penalty shootouts, showing why shootout outcomes must be considered separately from the recorded scoreline.
 - England's weakest tournament in the dataset was 2014, when the team recorded no wins, one draw and two losses.
+
+## Future Improvements
+
+- Extend the dataset with the 2018 and 2022 World Cups.
+- Create a documented mapping for historical team names.
+- Analyse penalty-shootout outcomes separately from regulation/extra-time scorelines.
+- Expand the dashboard with additional player-level analysis.
 
 ## Author
 
